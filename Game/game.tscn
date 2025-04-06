@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cm53hj2oddqae"]
+[gd_scene load_steps=10 format=3 uid="uid://cm53hj2oddqae"]
 
 [ext_resource type="Script" uid="uid://cm7at5lsosmop" path="res://Script/game.gd" id="1_bk3v5"]
 [ext_resource type="AudioStream" uid="uid://casjuusqq0woa" path="res://Audio/687105__aphom000__mouse-1-button-fast-click.wav" id="2_1r4le"]
+[ext_resource type="Texture2D" uid="uid://c3qm4oa0g8h8j" path="res://icon.svg" id="3_7raqb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bk3v5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -17,7 +18,11 @@ tonemap_mode = 2
 
 [sub_resource type="SphereMesh" id="SphereMesh_1r4le"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1r4le"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jcm6v"]
+albedo_texture = ExtResource("3_7raqb")
+
+[sub_resource type="QuadMesh" id="QuadMesh_1r4le"]
+size = Vector2(10, 10)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_bk3v5")
@@ -44,6 +49,7 @@ shadow_enabled = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Scene"]
 
 [node name="Points" type="Label" parent="Scene/CanvasLayer"]
+texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -56,6 +62,7 @@ text = "0
 "
 
 [node name="Size" type="Label" parent="Scene/CanvasLayer"]
+texture_filter = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -70,5 +77,6 @@ text = "0
 mesh = SubResource("SphereMesh_1r4le")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
-mesh = SubResource("BoxMesh_1r4le")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+material_override = SubResource("StandardMaterial3D_jcm6v")
+mesh = SubResource("QuadMesh_1r4le")
